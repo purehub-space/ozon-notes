@@ -5,6 +5,7 @@ export default {
     nav: [
       { text: "首页", link: "/" },
       { text: "文章", link: "/posts/" },
+      { text: "风格样板", link: "/styles" },
     ],
     sidebar: {
       "/posts/": [

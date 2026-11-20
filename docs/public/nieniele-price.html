@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>捏捏乐玩具厂 · 出厂价盘</title>
+<style>
+:root{
+  --ink:#171512; --ink-2:#4a453e; --ink-3:#8a8377;
+  --paper:#faf7f2; --card:#ffffff; --line:#e6e0d6;
+  --accent:#e8502f; --accent-soft:#fdece7; --teal:#0f8a7e; --teal-soft:#e6f4f1;
+  --shadow:0 1px 2px rgba(23,21,18,.05), 0 8px 24px rgba(23,21,18,.06);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.55;
+}
+.wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+/* top bar */
+.topbar{border-bottom:1px solid var(--line);background:rgba(250,247,242,.9);backdrop-filter:blur(8px);position:relative;z-index:5}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:52px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.06em;color:var(--ink-2)}
+.brand .mark{width:24px;height:24px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:0}
+.topbar .meta{font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+
+/* hero */
+.hero{padding:46px 0 30px;border-bottom:1px solid var(--line);background:
+  radial-gradient(1200px 340px at 78% -40%, #fdece7 0%, rgba(253,236,231,0) 70%),
+  radial-gradient(900px 300px at 8% -30%, #e6f4f1 0%, rgba(230,244,241,0) 70%);}
+.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;font-weight:600}
+h1{font-size:clamp(30px,4.4vw,50px);line-height:1.14;margin:12px 0 14px;letter-spacing:-.02em;font-weight:700}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:650px;color:var(--ink-2);font-size:15px;margin:0 0 26px}
+.stats{display:flex;flex-wrap:wrap;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px 7px 12px;display:flex;align-items:baseline;gap:8px;box-shadow:0 1px 0 rgba(23,21,18,.03)}
+.stat b{font-size:17px;letter-spacing:-.01em}
+.stat span{font-size:12px;color:var(--ink-3)}
+.stat i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--teal);margin-right:2px}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:6;background:rgba(250,247,242,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.toolbar .wrap{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:13px 28px}
+.search{position:relative;flex:1 1 240px;min-width:170px}
+.search input{width:100%;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:0 12px 0 34px;font-size:13.5px;color:var(--ink);outline:none;transition:.18s}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search svg{position:absolute;left:11px;top:11px;width:16px;height:16px;opacity:.45}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink-2);border-radius:999px;padding:7px 13px;font-size:12.5px;cursor:pointer;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:#cfc7b9;color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip .n{opacity:.55;font-size:11px;margin-left:5px}
+select{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:0 10px;font-size:13px;color:var(--ink-2);outline:none;cursor:pointer}
+
+/* grid */
+main{padding:26px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(23,21,18,.05), 0 16px 34px rgba(23,21,18,.09)}
+.thumb{position:relative;aspect-ratio:1/1;background:#fff;cursor:zoom-in;border-bottom:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:contain;display:block;background:#fdfdfc}
+.badge{position:absolute;left:10px;top:10px;background:rgba(23,21,18,.82);color:#fff;font-size:11px;letter-spacing:.06em;padding:3px 8px;border-radius:6px;backdrop-filter:blur(4px)}
+.nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-3);font-size:12px;letter-spacing:.08em;background:
+  repeating-linear-gradient(45deg,#fbfaf8,#fbfaf8 10px,#f6f3ed 10px,#f6f3ed 20px)}
+.body{padding:14px 15px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.cat-tag{font-size:10.5px;letter-spacing:.1em;color:var(--teal);background:var(--teal-soft);border-radius:5px;padding:2px 7px;align-self:flex-start}
+.name{font-size:15.5px;font-weight:650;line-height:1.35;margin:0;letter-spacing:-.01em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.price{display:flex;align-items:baseline;gap:3px;margin-top:auto}
+.price .cur{color:var(--accent);font-size:14px;font-weight:600}
+.price .num{color:var(--accent);font-size:27px;font-weight:750;letter-spacing:-.02em;line-height:1}
+.price .unit{color:var(--ink-3);font-size:11.5px;margin-left:4px}
+.price.multi .num{font-size:21px}
+.alt{font-size:11.5px;color:var(--ink-2);background:#fbf9f5;border:1px dashed var(--line);border-radius:8px;padding:6px 9px;line-height:1.5}
+.specs{display:flex;flex-wrap:wrap;gap:5px}
+.spec{font-size:11.5px;color:var(--ink-2);background:#f6f2ea;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.foot{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:9px;gap:8px;margin-top:2px}
+.foot span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{grid-column:1/-1;text-align:center;color:var(--ink-3);padding:70px 0;font-size:14px}
+
+/* footer */
+.notes{margin:42px 0 0;border-top:1px solid var(--line);padding-top:26px;display:grid;grid-template-columns:1.4fr 1fr;gap:28px}
+.notes h3{font-size:13px;letter-spacing:.1em;margin:0 0 10px;color:var(--ink)}
+.notes p,.notes li{font-size:12.5px;color:var(--ink-2);margin:0 0 6px;line-height:1.7}
+.notes ul{margin:0;padding-left:16px}
+.sig{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--line);margin-top:26px;padding:18px 0 46px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:20;background:rgba(18,16,14,.86);display:none;place-items:center;padding:24px}
+.lb.on{display:grid}
+.lb figure{margin:0;max-width:min(92vw,760px);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.lb img{display:block;width:100%;max-height:66vh;object-fit:contain;background:#fff}
+.lb figcaption{padding:14px 18px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.lb .t{font-size:15px;font-weight:650}
+.lb .s{font-size:12px;color:var(--ink-3);margin-top:2px}
+.lb .p{color:var(--accent);font-weight:700;font-size:20px;white-space:nowrap}
+.lb .close{position:absolute;top:18px;right:20px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:20px;cursor:pointer}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding:32px 0 24px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .body{padding:11px 11px 13px}
+  .name{font-size:13px}
+  .price .num{font-size:22px}
+  .notes{grid-template-columns:1fr}
+  .toolbar .wrap{padding:10px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand"><span class="mark">NN</span> 捏捏乐玩具厂 · 出厂报价</div>
+  <div class="meta">价盘更新 2026-11-20</div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Factory Price List · Squeeze Toy</div>
+  <h1>捏捏乐出厂价盘<br><em>63 款在售</em></h1>
+  <p class="lede">按款（序号）排列的整箱出厂价，含款式实拍图、单品规格、箱规与整箱重量。单价为工厂出厂价，整箱 144 只起订。</p>
+  <div class="stats">
+    <div class="stat"><i></i><b>63</b><span>在售款式</span></div>
+    <div class="stat"><i></i><b>¥1.8–11</b><span>单只价</span></div>
+    <div class="stat"><i></i><b>¥19–25</b><span>礼盒价 / 套</span></div>
+    <div class="stat"><i></i><b>144 只</b><span>标准箱规</span></div>
+    <div class="stat"><i></i><b>5</b><span>品类</span></div>
+  </div>
+</div></header>
+
+<div class="toolbar"><div class="wrap">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="搜索名称或序号，如「包子」「爆珠」" autocomplete="off">
+  </div>
+  <div class="chips" id="chips"></div>
+  <select id="sort">
+    <option value="no">按序号排序</option>
+    <option value="asc">单价 低 → 高</option>
+    <option value="desc">单价 高 → 低</option>
+  </select>
+</div></div>
+
+<main><div class="wrap"><div class="grid" id="grid"></div></div></main>
+
+<section class="notes"><div class="wrap" style="padding:0">
+  <div>
+    <h3>报价说明</h3>
+    <ul>
+      <li>单价为工厂出厂价（元/只），不含税、不含运费与包装定制费用。</li>
+      <li>标准起订量为 1 箱，多数款式 144 只/箱，按整箱出货。</li>
+      <li>多价款式（如「果胶 / 爆珠 / 麦芽糖」）为同款不同填充材质的分档报价，下单时请指明材质。</li>
+      <li>箱规为外箱尺寸，重量为整箱毛重，实际以厂家出货确认为准。</li>
+    </ul>
+  </div>
+  <div>
+    <h3>数据来源</h3>
+    <p>本页由《捏捏乐玩具厂出厂价盘.xls》整理生成，共 63 款，图片取自原表款式实拍图。</p>
+    <p>图片已压缩为 800px 长边的网页版本，原图保留在源文件中。</p>
+  </div>
+</div></section>
+
+<div class="sig"><div class="wrap" style="padding:0;display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:8px">
+  <span>捏捏乐玩具厂 · 出厂价盘</span>
+  <span>整理日期 2026-11-20 · 共 63 款</span>
+</div></div>
+
+<div class="lb" id="lb">
+  <button class="close" id="lbClose" aria-label="关闭">×</button>
+  <figure>
+    <img id="lbImg" alt="">
+    <figcaption>
+      <div><div class="t" id="lbName"></div><div class="s" id="lbSpec"></div></div>
+      <div class="p" id="lbPrice"></div>
+    </figcaption>
+  </figure>
+</div>
+
+<script>
+const DATA = [{"no":3,"name":"肥皂凡士林","price":"4.5","base":4.5,"pmin":4.5,"pmax":4.5,"variant":false,"unit":"只","spec":"100g/6X8cm","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/g4vXwIbIkw"]},{"no":6,"name":"红唇凡士林","price":"4.7","base":4.7,"pmin":4.7,"pmax":4.7,"variant":false,"unit":"只","spec":"180g/5X10cm","qty":"144/箱","carton":"45X30X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/69JPZrUjSa"]},{"no":7,"name":"6cm圆球花片凡士林","price":"4.2","base":4.2,"pmin":4.2,"pmax":4.2,"variant":false,"unit":"只","spec":"120g/6cm","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/YGjeXC89mm"]},{"no":11,"name":"黄油棒凡士林彩带","price":"5.5","base":5.5,"pmin":5.5,"pmax":5.5,"variant":false,"unit":"只","spec":"13.5cm/200g","qty":"144/箱","carton":"55X40X30cm","weight":"30kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/9sKXSrdX1U"]},{"no":12,"name":"果胶包子","price":"2.7","base":2.7,"pmin":2.7,"pmax":2.7,"variant":false,"unit":"只","spec":"8.5cm/250g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/kzAehVGCvC"]},{"no":14,"name":"7cm奶酪凡士林","price":"6.9","base":6.9,"pmin":6.9,"pmax":6.9,"variant":false,"unit":"只","spec":"7cm/250g","qty":"144/箱","carton":"55X40X30cm","weight":"33kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/kkUxtEhzt4"]},{"no":16,"name":"泡面积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"120g/9cm","qty":"144/箱","carton":"45X30X30cm","weight":"18kg","cat":"积木款","imgs":[]},{"no":18,"name":"8.5cm爆珠包子","price":"2.8","base":2.8,"pmin":2.8,"pmax":2.8,"variant":false,"unit":"只","spec":"8.5cm/200g","qty":"144/箱","carton":"65X49X32cm","weight":"30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/yhqsrlagsN","https://aka.doubaocdn.com/s/zDoQCHUVI2"]},{"no":19,"name":"8.5cm凡士林包子","price":"4.4","base":4.4,"pmin":4.4,"pmax":4.4,"variant":false,"unit":"只","spec":"8.5cm/180g","qty":"144/箱","carton":"65X49X32cm","weight":"35kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/7nDLh3ph4q"]},{"no":20,"name":"香肠积木","price":"4.5","base":4.5,"pmin":4.5,"pmax":4.5,"variant":false,"unit":"只","spec":"11X3cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"17kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/Koe0sE8uP0"]},{"no":21,"name":"火龙果积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"6X8cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"17kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/TgIqD4hqd0"]},{"no":22,"name":"草莓积木","price":"5.1（不带表情4.6）","base":5.1,"pmin":4.6,"pmax":5.1,"variant":true,"unit":"只","spec":"6X8cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/4hWXrsHa5L"]},{"no":23,"name":"白菜积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"5X7cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/nqQnp9fGjO"]},{"no":24,"name":"高透奶茶杯凡士林","price":"6.9","base":6.9,"pmin":6.9,"pmax":6.9,"variant":false,"unit":"只","spec":"6X10cm/180g","qty":"144/箱","carton":"55X40X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/sU7TCNw4rw"]},{"no":25,"name":"高透漂流瓶凡士林","price":"6.9","base":6.9,"pmin":6.9,"pmax":6.9,"variant":false,"unit":"只","spec":"6X9cm/180g","qty":"144/箱","carton":"55X40X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/uTozprkbQu"]},{"no":26,"name":"小鸟积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"6X6.5cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/5TvgADBvdD"]},{"no":27,"name":"沙琪玛积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"4X10cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/yfitZUSKYs"]},{"no":28,"name":"香蕉积木","price":"4.7","base":4.7,"pmin":4.7,"pmax":4.7,"variant":false,"unit":"只","spec":"5X10cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/Fo8EdpyVQ3"]},{"no":29,"name":"圣诞路鹿角包爆珠/果胶","price":"2.8","base":2.8,"pmin":2.8,"pmax":2.8,"variant":false,"unit":"只","spec":"8.5cm/爆珠200g 果胶250g","qty":"144/箱","carton":"65X49X32cm","weight":"30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/xA8XpcFhAh"]},{"no":30,"name":"小云朵面粉","price":"3.9","base":3.9,"pmin":3.9,"pmax":3.9,"variant":false,"unit":"只","spec":"6X8cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/Jd6WO0uTAk"]},{"no":31,"name":"金币","price":"3.6","base":3.6,"pmin":3.6,"pmax":3.6,"variant":false,"unit":"只","spec":"8.5cm/210g","qty":"144/箱","carton":"45X30X30cm","weight":"32kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/WwAP41XV20"]},{"no":32,"name":"圣诞麋鹿果胶包子8.5cm","price":"2.8","base":2.8,"pmin":2.8,"pmax":2.8,"variant":false,"unit":"只","spec":"8.5cm/250g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/m8WzYwTU3x"]},{"no":33,"name":"圣诞麋鹿爆珠包子8.5cm","price":"2.9","base":2.9,"pmin":2.9,"pmax":2.9,"variant":false,"unit":"只","spec":"8.5cm/200g","qty":"144/箱","carton":"65X49X32cm","weight":"30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/aiwoQ7ttGh"]},{"no":34,"name":"圣诞麋鹿果胶","price":"2.8","base":2.8,"pmin":2.8,"pmax":2.8,"variant":false,"unit":"只","spec":"6X6.5cm/160g","qty":"200/箱","carton":"55X40X30cm","weight":"33kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/ixiuDpNUNo"]},{"no":35,"name":"圣诞麋鹿果胶/爆珠","price":"2.6","base":2.6,"pmin":2.6,"pmax":2.6,"variant":false,"unit":"只","spec":"6X6.5cm/果胶160g 爆珠120g","qty":"144/箱","carton":"65X49X32cm","weight":"24kg/20kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/hYM56XRLnI"]},{"no":36,"name":"桃子捏捏乐积木款可塑形","price":"3.9 （带表情4.4）","base":3.9,"pmin":3.9,"pmax":4.4,"variant":true,"unit":"只","spec":"6X6.5cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/GtITqwGv32"]},{"no":37,"name":"橘子捏捏乐积木款可塑形","price":"3.7（带表情4.2）","base":3.7,"pmin":3.7,"pmax":4.2,"variant":true,"unit":"只","spec":"6X6.5cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/PXRhNvq17I"]},{"no":38,"name":"花生捏捏乐积木款可塑形","price":"4.2 凡士林：4.5 （带表情：积木 4.7 凡士林5）","base":4.2,"pmin":4.2,"pmax":5.0,"variant":true,"unit":"只","spec":"6X11cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"18kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/fMRu6q5gGZ"]},{"no":39,"name":"芒果捏捏乐积木款可塑形","price":"4.3","base":4.3,"pmin":4.3,"pmax":4.3,"variant":false,"unit":"只","spec":"6X8cm/90g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/Bi3cDrdrZE"]},{"no":40,"name":"菠萝包捏捏乐积木款可塑形","price":"4.4","base":4.4,"pmin":4.4,"pmax":4.4,"variant":false,"unit":"只","spec":"8.5cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"18kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/MRmNrjADiZ"]},{"no":41,"name":"奶酪捏捏乐积木款可塑形","price":"5.2","base":5.2,"pmin":5.2,"pmax":5.2,"variant":false,"unit":"只","spec":"6cm/120g","qty":"144/箱","carton":"55X40X30cm","weight":"19kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/bSUFFx1mhk"]},{"no":42,"name":"奶酪捏捏乐凡士林可塑形","price":"5.2","base":5.2,"pmin":5.2,"pmax":5.2,"variant":false,"unit":"只","spec":"6cm/180g","qty":"144/箱","carton":"55X40X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/QUDSy9LQnC"]},{"no":43,"name":"手作球凡士林可塑形/透明皮 珠光皮","price":"3.3","base":3.3,"pmin":3.3,"pmax":3.3,"variant":false,"unit":"只","spec":"6cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"手作球","imgs":["https://aka.doubaocdn.com/s/OuxfwErUKh"]},{"no":44,"name":"手作球凡士林可塑形/加零件海洋系列 水钻系列 水果系列","price":"3.8","base":3.8,"pmin":3.8,"pmax":3.8,"variant":false,"unit":"只","spec":"6cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"手作球","imgs":["https://aka.doubaocdn.com/s/sxedqzqZOu"]},{"no":45,"name":"手作球凡士林可塑形/大水果系列","price":"4.1","base":4.1,"pmin":4.1,"pmax":4.1,"variant":false,"unit":"只","spec":"6cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"手作球","imgs":["https://aka.doubaocdn.com/s/mLAVIUT3vu"]},{"no":46,"name":"手作球凡士林可塑形/圣诞系列","price":"4.5","base":4.5,"pmin":4.5,"pmax":4.5,"variant":false,"unit":"只","spec":"6cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"手作球","imgs":["https://aka.doubaocdn.com/s/317fZd4bcz"]},{"no":47,"name":"耗牛捏捏乐","price":"11","base":11.0,"pmin":11.0,"pmax":11.0,"variant":false,"unit":"只","spec":"14cm/280g","qty":"36/箱","carton":"55X40X30cm","weight":"13kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/XaIhj8JGoy"]},{"no":48,"name":"高透梨子凡士林大水果","price":"8.5","base":8.5,"pmin":8.5,"pmax":8.5,"variant":false,"unit":"只","spec":"6X10cm/180g","qty":"144/箱","carton":"45X30X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/ggGNhSVqh9"]},{"no":49,"name":"云朵积木","price":"4.3","base":4.3,"pmin":4.3,"pmax":4.3,"variant":false,"unit":"只","spec":"5X7cm/90g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/JtB1s99vdy"]},{"no":50,"name":"方块5cm麦芽糖","price":"3.1","base":3.1,"pmin":3.1,"pmax":3.1,"variant":false,"unit":"只","spec":"5cm/130g","qty":"144/箱","carton":"45X30X30cm","weight":"23kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/XryFmmkupg"]},{"no":51,"name":"8件套捏捏乐礼盒系列1","price":"24.1","base":24.1,"pmin":24.1,"pmax":24.1,"variant":false,"unit":"套","spec":"27×20×6cm/680g","qty":"20/箱","carton":"55X40X30cm","weight":"15kg","cat":"礼盒套装","imgs":["https://aka.doubaocdn.com/s/hEG2JSCklc"]},{"no":52,"name":"8件套捏捏乐礼盒系列2","price":"25","base":25.0,"pmin":25.0,"pmax":25.0,"variant":false,"unit":"套","spec":"27×20×6cm/950g","qty":"20/箱","carton":"55X40X30cm","weight":"21KG","cat":"礼盒套装","imgs":["https://aka.doubaocdn.com/s/qIkHMiucMi"]},{"no":53,"name":"4件套捏捏乐礼盒粉色系列3","price":"19","base":19.0,"pmin":19.0,"pmax":19.0,"variant":false,"unit":"套","spec":"15×15×6cm/550g","qty":"30/箱","carton":"55X40X30cm","weight":"18kg","cat":"礼盒套装","imgs":["https://aka.doubaocdn.com/s/E3IVGrvkeU"]},{"no":54,"name":"8件套捏捏乐礼盒粉色系列5（小方块）","price":"24","base":24.0,"pmin":24.0,"pmax":24.0,"variant":false,"unit":"套","spec":"27×20×6cm/550g","qty":"20/箱","carton":"55X40X30cm","weight":"14kg","cat":"礼盒套装","imgs":["https://aka.doubaocdn.com/s/07pBIUAm74"]},{"no":55,"name":"曲奇饼干积木","price":"4.8","base":4.8,"pmin":4.8,"pmax":4.8,"variant":false,"unit":"只","spec":"6X5cm/100g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/rkmHIUIsGo"]},{"no":56,"name":"土豆积木","price":"4.6","base":4.6,"pmin":4.6,"pmax":4.6,"variant":false,"unit":"只","spec":"6cm/90g","qty":"144/箱","carton":"45X30X30cm","weight":"16kg","cat":"积木款","imgs":["https://aka.doubaocdn.com/s/BQWfOnAU6K"]},{"no":57,"name":"8.5cm独角兽包子爆珠/果胶","price":"2.9","base":2.9,"pmin":2.9,"pmax":2.9,"variant":false,"unit":"只","spec":"8.5cm/200g","qty":"144/箱","carton":"65X49X32cm","weight":"30kg/40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/vtdDwz0uTn"]},{"no":58,"name":"黄油棒","price":"凡士林：6.2 积木：5.4","base":6.2,"pmin":5.4,"pmax":6.2,"variant":true,"unit":"只","spec":"13.5X4cm/凡士林200g 积木120g ","qty":"144/箱","carton":"55X40X30cm","weight":"32kg/30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/IweVUzUtU2"]},{"no":59,"name":"8.5cm格林奇果胶包子","price":"2.8","base":2.8,"pmin":2.8,"pmax":2.8,"variant":false,"unit":"只","spec":"8.5cm/250g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/1bjbkw1hPB"]},{"no":60,"name":"8.5cm面粉包子","price":"2.7","base":2.7,"pmin":2.7,"pmax":2.7,"variant":false,"unit":"只","spec":"8.5cm/110g","qty":"144/箱","carton":"65X49X32cm","weight":"19kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/JVP0CycHhD"]},{"no":61,"name":"5.5cm包子","price":"果胶：1.8 爆珠：1.8 麦芽糖：2.3","base":1.8,"pmin":1.8,"pmax":2.3,"variant":true,"unit":"只","spec":"5.5cm/60g","qty":"288/箱","carton":"65X49X32cm","weight":"18kg/16kg/20kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/lW2rE4VEyL"]},{"no":62,"name":"8.5cm带灯包子","price":"果胶：2.8爆珠：2.9","base":2.8,"pmin":2.8,"pmax":2.9,"variant":true,"unit":"只","spec":"8.5cm/果胶250g 爆珠200g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg/30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/iFYcsLvfJ2"]},{"no":63,"name":"8.5cm雪花包子","price":"果胶：2.8爆珠：2.9","base":2.8,"pmin":2.8,"pmax":2.9,"variant":true,"unit":"只","spec":"8.5cm/果胶250g 爆珠200g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg/30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/xYDZWHVLX8"]},{"no":64,"name":"8.5cm亮片包子","price":"果胶：2.8爆珠：2.9","base":2.8,"pmin":2.8,"pmax":2.9,"variant":true,"unit":"只","spec":"8.5cm/果胶250g 爆珠200g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg/30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/f9A9jG1Q6d"]},{"no":65,"name":"白色彩带包子","price":"2.9","base":2.9,"pmin":2.9,"pmax":2.9,"variant":false,"unit":"只","spec":"8.5cm/果胶250g 爆珠200g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/DHl0umu8Lr"]},{"no":66,"name":"黄油棒","price":"1.8","base":1.8,"pmin":1.8,"pmax":1.8,"variant":false,"unit":"只","spec":"13X4cm/40g","qty":"288/箱","carton":"55X40X30cm","weight":"15kg ","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/SLh9jVUgs3"]},{"no":67,"name":"方块5.5cm","price":"3.5","base":3.5,"pmin":3.5,"pmax":3.5,"variant":false,"unit":"只","spec":"5.5cm/200g","qty":"100/箱","carton":"55X40X30cm","weight":"21kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/UYp266GgMy"]},{"no":68,"name":"水滴","price":"3.6","base":3.6,"pmin":3.6,"pmax":3.6,"variant":false,"unit":"只","spec":"6X8cm/180g","qty":"144/箱","carton":"55X40X30cm","weight":"27kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/xpo2djkpVR"]},{"no":69,"name":"9X5.5cm水母","price":"麦芽糖：3.5 果胶：2.9","base":3.5,"pmin":2.9,"pmax":3.5,"variant":true,"unit":"只","spec":"9X5.5cm/120g","qty":"144/箱","carton":"45X30X30cm","weight":"19kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/JRGvr60ALS"]},{"no":70,"name":"8.5cm麦芽糖包子","price":"3.7","base":3.7,"pmin":3.7,"pmax":3.7,"variant":false,"unit":"只","spec":"8.5cm/250g","qty":"144/箱","carton":"65X49X32cm","weight":"40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/vUUS5rMXba"]},{"no":71,"name":"8.5cm夜光包子","price":"果胶：2.8 爆珠：2.9 麦芽糖：3.8","base":2.8,"pmin":2.8,"pmax":3.8,"variant":true,"unit":"只","spec":"8.5cm/果胶250g 爆珠200g 麦芽糖250g ","qty":"144/箱","carton":"65X49X32cm","weight":"40kg/30kg/40kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/KBfvIGhVRU"]},{"no":72,"name":"七彩云朵","price":"果胶：2.8 爆珠：2.9","base":2.8,"pmin":2.8,"pmax":2.9,"variant":true,"unit":"只","spec":"5X7cm/160g","qty":"144/箱","carton":"45X30X30cm","weight":"30kg","cat":"包子·爆珠","imgs":["https://aka.doubaocdn.com/s/VVIJFzdzWU","https://aka.doubaocdn.com/s/VdqqQTxmvx"]},{"no":73,"name":"饮料瓶高透凡士林","price":"7.2","base":7.2,"pmin":7.2,"pmax":7.2,"variant":false,"unit":"只","spec":"6X11cm/180g","qty":"144/箱","carton":"55X40X30cm","weight":"27kg","cat":"凡士林","imgs":["https://aka.doubaocdn.com/s/MtnwegUQds"]}];
+const CATS = ["凡士林", "包子·爆珠", "手作球", "礼盒套装", "积木款"];
+
+const grid = document.getElementById('grid');
+const chipsBox = document.getElementById('chips');
+const qEl = document.getElementById('q');
+const sortEl = document.getElementById('sort');
+let cat = '全部';
+
+// category chips
+function buildChips(){
+  const all = [{k:'全部', n:DATA.length}].concat(CATS.map(c=>({k:c, n:DATA.filter(d=>d.cat===c).length})));
+  chipsBox.innerHTML = all.map(c=>`<button class="chip${c.k===cat?' on':''}" data-cat="${c.k}">${c.k}<span class="n">${c.n}</span></button>`).join('');
+  chipsBox.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;buildChips();render();});
+}
+
+function money(v){ return v==null ? '—' : (Math.round(v*100)%100===0 ? v.toFixed(1) : v.toFixed(2)); }
+
+function priceBlock(d){
+  const main = `<div class="price"><span class="cur">¥</span><span class="num">${money(d.base)}</span><span class="unit">/ ${d.unit}</span></div>`;
+  const alt = d.variant ? `<div class="alt">${d.price}</div>` : '';
+  return main + alt;
+}
+
+function render(){
+  const kw = qEl.value.trim().toLowerCase();
+  let list = DATA.filter(d=>{
+    if(cat!=='全部' && d.cat!==cat) return false;
+    if(!kw) return true;
+    return (d.name||'').toLowerCase().includes(kw) || String(d.no).includes(kw) || (d.cat||'').includes(kw);
+  });
+  const s = sortEl.value;
+  if(s==='asc') list = list.slice().sort((a,b)=>(a.pmin??999)-(b.pmin??999));
+  if(s==='desc') list = list.slice().sort((a,b)=>(b.pmax??-1)-(a.pmax??-1));
+  if(s==='no') list = list.slice().sort((a,b)=>(a.no??0)-(b.no??0));
+
+  if(!list.length){ grid.innerHTML = `<div class="empty">没有匹配的款式，换个关键词或点「全部」试试</div>`; return; }
+  grid.innerHTML = list.map((d,i)=>{
+    const img = d.imgs && d.imgs.length
+      ? `<img src="${d.imgs[0]}" alt="${d.name}" loading="lazy" referrerpolicy="no-referrer">`
+      : `<div class="nophoto">暂无实拍图</div>`;
+    return `<article class="card">
+      <div class="thumb" data-i="${i}">${img}<span class="badge">NO.${d.no ?? '—'}</span></div>
+      <div class="body">
+        <span class="cat-tag">${d.cat}</span>
+        <h3 class="name">${d.name}</h3>
+        ${priceBlock(d)}
+        <div class="specs">
+          ${d.spec?`<span class="spec">单品 ${d.spec}</span>`:''}
+          ${d.qty?`<span class="spec">${d.qty}</span>`:''}
+        </div>
+        <div class="foot"><span>箱规 ${d.carton||'—'}</span><span>毛重 ${d.weight||'—'}</span></div>
+      </div>
+    </article>`;
+  }).join('');
+
+  grid.querySelectorAll('.thumb').forEach(t=>{
+    t.onclick = ()=>{
+      const d = list[+t.dataset.i];
+      if(!(d.imgs&&d.imgs.length)) return;
+      document.getElementById('lbImg').src = d.imgs[0];
+      document.getElementById('lbImg').alt = d.name;
+      document.getElementById('lbName').textContent = `NO.${d.no} ${d.name}`;
+      document.getElementById('lbSpec').textContent = [d.spec, d.qty, d.carton, d.weight].filter(Boolean).join(' · ');
+      document.getElementById('lbPrice').textContent = d.multiline ? d.price : `¥${money(d.pmin)} / 只`;
+      document.getElementById('lb').classList.add('on');
+    };
+  });
+}
+
+document.getElementById('lbClose').onclick = ()=>document.getElementById('lb').classList.remove('on');
+document.getElementById('lb').onclick = e=>{ if(e.target.id==='lb') e.currentTarget.classList.remove('on'); };
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('lb').classList.remove('on'); });
+qEl.oninput = render;
+sortEl.onchange = render;
+buildChips(); render();
+</script>
+</body>
+</html>
